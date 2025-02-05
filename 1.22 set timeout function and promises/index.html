@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Call Stack: [Main code (synchronous)]<br>
+        Microtask Queue (VIP): [Promise callback]<br>
+        Event Queue: [setTimeout, events]<br>
+    </h1>
+    <pre>
+        1. Call Stack:
+        The Call Stack is where the JavaScript engine executes your synchronous code—line by line.
+        
+3. Event Queue (Regular Queue for setTimeout, etc.):
+        <h1>
+            setTimeout(): Executes a function after a specified delay (even if it's 0ms).<br>
+            setInterval(): Repeatedly executes a function at a specified interval.
+        </h1>
+setTimeout() / setInterval(): Timed callbacks.
+DOM Events: User-triggered events like clicks and key presses.
+I/O Operations: File read/write, network requests.
+setImmediate() (Node.js): Callback after I/O events.
+requestAnimationFrame(): Browser animation-related tasks.
+Other Async APIs: Events from Web APIs like WebSockets, fetch, etc
+How it works: After the delay, the callback is executed only when the Call Stack is empty.
+
+        Promise:
+        What it does: Represents the eventual completion (or failure) of an asynchronous operation and allows chaining .then() or .catch().
+        How it works: Promises use the Microtask Queue. They get executed after the current execution context but before the Event Queue.
+        Promises go into a VIP queue called the Microtask Queue, which gives them priority over the normal Event Queue (the "waiting" queue, like the one setTimeout uses).
+        When a Promise is resolved or rejected, its .then() or .catch() callback gets placed in the Microtask Queue.
+        The Microtask Queue has higher priority than the Event Queue (where setTimeout, setInterval, and other events go).
+        Promises are executed after the Call Stack is empty but before any other tasks in the Event Queue.
+
+
+    </pre>
+</body>
+</html>
